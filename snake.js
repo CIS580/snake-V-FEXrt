@@ -14,6 +14,7 @@ var oldTime = performance.now();
  */
 function loop(newTime) {
   var elapsedTime = newTime - oldTime;
+  oldTime = newTime;
 
   update(elapsedTime);
   render(elapsedTime);
