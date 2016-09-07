@@ -8,8 +8,8 @@ function spawnApple(){
   }
 
   apple.isEaten = false;
-  apple.cx = Math.floor((Math.random() * backBuffer.width));
-  apple.cy = Math.floor((Math.random() * backBuffer.height));
+  apple.cx = Math.floor((Math.random() * (backBuffer.width - 40))) + 20;
+  apple.cy = Math.floor((Math.random() * (backBuffer.height - 40))) + 20;
 
 }
 
@@ -62,32 +62,34 @@ function moveSnake(elapsedTime){
  */
 function addSnakePart(){
 
-  var x = player.head.cx;
-  var y = player.head.cy;
+  var last = player.parts[player.parts.length - 1];
+  var x = last.cx;
+  var y = last.cy;
 
-  switch(player.direction){
-
-    case Direction.Up:
-      y = y - 10;
-      break;
-    case Direction.Down:
-      y = y + 10;
-      break;
-    case Direction.Left:
-      x = x - 10;
-      break;
-    case Direction.Right:
-      x = x + 10;
-      break;
+  if(player.parts.length == 1){
+    switch(player.direction){
+      case Direction.Up:
+        y = y - 10;
+        break;
+      case Direction.Down:
+        y = y + 10;
+        break;
+      case Direction.Left:
+        x = x - 10;
+        break;
+      case Direction.Right:
+        x = x + 10;
+        break;
+    }
   }
 
-  player.head = {
+  var part = {
     cx: x,
     cy: y,
     r: 5
   };
 
-  player.parts.unshift(player.head);
+  player.parts.push(part);
 }
 
 /**
@@ -110,7 +112,7 @@ function isOutOfBounds(){
  * @returns Boolean indicating if apples has been ate
  */
 function hasAteApple(){
-  return hasCollidedWith(apple);
+  return hasCollidedWithHead(apple);
 }
 
 /**
@@ -128,7 +130,7 @@ function eatApple(){
  */
 function hasAteTail(){
     for(i = 1; i < player.parts.length; i++){
-        if(hasCollidedWith(player.parts[i])){
+        if(hasCollidedWithHead(player.parts[i])){
           return true;
         }
     }
@@ -136,17 +138,32 @@ function hasAteTail(){
 }
 
 /**
- * @function hasCollidedWith
+ * @function hasCollidedWithHead
  * Determine if item has collided with snake head
  * @param{item} collision item
  * @returns Boolean indicating if collision
  */
-function hasCollidedWith(item){
-  var dist2 = Math.pow(player.head.cx - item.cx, 2) + Math.pow(player.head.cy - item.cy, 2);
-  if(dist2 < Math.pow(player.head.r + item.r, 2)) return true;
+function hasCollidedWithHead(item){
+  return haveItemsCollided(item, player.head);
+}
+
+/**
+ * @function haveItemsCollided
+ * Determine if the items have collided
+ * @param{item1} collision item
+ * @param{item2} other collision item
+ * @returns Boolean indicating if collision
+ */
+function haveItemsCollided(item1, item2){
+  var dist2 = Math.pow(item2.cx - item1.cx, 2) + Math.pow(item2.cy - item1.cy, 2);
+  if(dist2 < Math.pow(item2.r + item1.r, 2)) return true;
   return false;
 }
 
+/**
+ * @function endGame
+ * Change game state to game over
+ */
 function endGame(){
   gameState = GameState.GameOver;
 }
