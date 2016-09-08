@@ -31,12 +31,13 @@ var apple = {
   r: 4
 }
 
-var gameState = GameState.Playing;
+var gameState = GameState.Instructions;
 
 var player = {
   direction: Direction.Right,
   speed: 0.5,
   isMoving: false,
+  score: 0,
   head: {
     cx: 30,
     cy: 30,

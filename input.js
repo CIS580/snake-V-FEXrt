@@ -1,5 +1,35 @@
 window.onkeydown = function(event) {
   event.preventDefault();
+
+  switch (gameState) {
+    case GameState.Instructions:
+      inputInstructions(event);
+      break;
+    case GameState.Playing:
+      inputGameplay(event);
+      break;
+    case GameState.GameOver:
+      inputGameOver(event);
+      break;
+  }
+
+  return false;
+}
+
+function inputInstructions(event){
+  if(event.keyCode == 32){
+    gameState = GameState.Playing;
+  }
+}
+
+function inputGameOver(event) {
+  if(event.keyCode == 32){
+    resetGameDefaults();
+    gameState = GameState.Playing;
+  }
+}
+
+function inputGameplay(event) {
   player.isMoving = true;
 
   switch(event.keyCode) {
@@ -31,6 +61,4 @@ window.onkeydown = function(event) {
         debug.play();
         break;
     }
-
-  return false;
 }

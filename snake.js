@@ -39,23 +39,16 @@ function loop(newTime) {
  */
 function update(elapsedTime) {
 
-  // TODO: Spawn an apple periodically
   spawnApple();
-  // TODO: Grow the snake periodically
-  // Happens on apple consumption
-  // TODO: Move the snake
   moveSnake(elapsedTime);
-  // TODO: Determine if the snake has moved out-of-bounds (offscreen)
   if(isOutOfBounds()){
     endGame();
   }
-  // TODO: Determine if the snake has eaten an apple
   if(hasAteApple()){
-    // TODO: Increase score
     eatApple();
+    increasePlayerScore(1);
     addSnakePart();
   }
-  // TODO: Determine if the snake has eaten its tail
   if(hasAteTail()){
     endGame();
   }

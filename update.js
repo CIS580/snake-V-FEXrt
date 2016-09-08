@@ -167,3 +167,26 @@ function haveItemsCollided(item1, item2){
 function endGame(){
   gameState = GameState.GameOver;
 }
+
+function resetGameDefaults(){
+  player.isMoving = false;
+  player.score = 0;
+  player.head = {
+      cx: 30,
+      cy: 30,
+      r: 5
+    };
+  player.parts = [];
+
+  player.parts.push(player.head);
+  apple.isEaten = true;
+}
+
+/**
+ * @function increasePlayerScore
+ * Increase the player score by amount
+ * @param{amount} amount to increase score by
+ */
+function increasePlayerScore(amount){
+  player.score += amount;
+}
