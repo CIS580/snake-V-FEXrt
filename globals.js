@@ -31,6 +31,12 @@ var apple = {
   r: 4
 }
 
+var greenApple = {
+  cx: 0,
+  cy: 0,
+  r: 4
+}
+
 var gameState = GameState.Instructions;
 
 var player = {

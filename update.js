@@ -11,6 +11,14 @@ function spawnApple(){
   apple.cx = Math.floor((Math.random() * (backBuffer.width - 40))) + 20;
   apple.cy = Math.floor((Math.random() * (backBuffer.height - 40))) + 20;
 
+  greenApple.cx = apple.cx;
+  greenApple.cy = apple.cy;
+
+  while(apple.cx == greenApple.cx && apple.cy == greenApple.cy){
+    greenApple.cx = Math.floor((Math.random() * (backBuffer.width - 40))) + 20;
+    greenApple.cy = Math.floor((Math.random() * (backBuffer.height - 40))) + 20;
+  }
+
 }
 
 /**
@@ -109,10 +117,19 @@ function isOutOfBounds(){
 /**
  * @function hasAteApple
  * Determines if the snake has ate the apple
- * @returns Boolean indicating if apples has been ate
+ * @returns Boolean indicating if apple has been ate
  */
 function hasAteApple(){
   return hasCollidedWithHead(apple);
+}
+
+/**
+ * @function hasAteGreenApple
+ * Determines if the snake has ate the green apple
+ * @returns Boolean indicating if  green apple has been ate
+ */
+function hasAteGreenApple() {
+  return hasCollidedWithHead(greenApple);
 }
 
 /**

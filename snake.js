@@ -52,6 +52,9 @@ function update(elapsedTime) {
   if(hasAteTail()){
     endGame();
   }
+  if(hasAteGreenApple()){
+    endGame();
+  }
   // TODO: [Extra Credit] Determine if the snake has run into an obstacle
 }
 

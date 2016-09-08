@@ -18,6 +18,18 @@ function drawSnake(){
  */
 function drawApple(){
   backCtx.beginPath();
+  backCtx.arc(greenApple.cx, greenApple.cy, greenApple.r, 0, 2 * Math.PI);
+  backCtx.fillStyle = "green";
+  backCtx.fill();
+
+  backCtx.fillStyle = "brown";
+  backCtx.beginPath();
+  backCtx.moveTo(greenApple.cx, greenApple.cy - greenApple.r);
+  backCtx.lineTo(greenApple.cx + 7, greenApple.cy - greenApple.r - 3);
+  backCtx.lineTo(greenApple.cx + 7, greenApple.cy - greenApple.r);
+  backCtx.fill();
+
+  backCtx.beginPath();
   backCtx.arc(apple.cx, apple.cy, apple.r, 0, 2 * Math.PI);
   backCtx.fillStyle = "red";
   backCtx.fill();
@@ -50,8 +62,8 @@ function renderGamePlay(){
 
 function drawInstructions(){
   let messages = [
-    "Welcome to snake! Rack up points by collecting as many red apples as",
-    "possible! But be careful not to hit your head on the wall or bite your own tail!",
+    "Welcome to snake! Rack up points by collecting as many red apples as possible!",
+    "But be careful not to hit your head on the wall, bite your own tail, or eat a rotten apple!",
     "WASD or Arrow keys to move. Press space to begin!"
   ];
   drawFullScreenMessage(messages, 1, 20);
