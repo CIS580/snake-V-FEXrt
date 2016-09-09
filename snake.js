@@ -16,6 +16,10 @@ function loop(newTime) {
   var elapsedTime = newTime - oldTime;
   oldTime = newTime;
 
+  window.setTimeout(function(){actualLoop(elapsedTime);},50);
+}
+
+function actualLoop(elapsedTime){
   update(elapsedTime);
   render(elapsedTime);
 

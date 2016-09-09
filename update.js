@@ -30,7 +30,7 @@ function moveSnake(elapsedTime){
     return;
   }
 
-  var change = Math.round(player.speed * elapsedTime / 10) * 10;
+  var change = Math.round(player.speed * 10 /* elapsedTime */ / 10) * 10;
 
   player.parts.reverse().forEach(function(item, index){
     if(index == player.parts.length - 1){
